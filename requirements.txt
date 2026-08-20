@@ -1,0 +1,11 @@
+python
+numpy
+pandas
+matplotlib
+seaborn
+scikit-learn>=1.4   # root_mean_squared_error requires >=1.4
+xgboost
+optuna
+plotly              # used by optuna.visualization
+joblib
+jupyter

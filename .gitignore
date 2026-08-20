@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+
+.ipynb_checkpoints/
+
+
+data/processed/
+src/models/*.pkl
+
+# Env / secrets
+.env
+
+
+# Editors
+.vscode/
+.idea/
