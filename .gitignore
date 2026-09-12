@@ -1,20 +1,28 @@
 # Python
 __pycache__/
-*.pyc
-.venv/
-venv/
-*.egg-info/
+*.py[cod]
+*.pyo
 
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Jupyter
 .ipynb_checkpoints/
 
-
-data/processed/
-src/models/*.pkl
-
-# Env / secrets
+# Environment variables
 .env
 
-
-# Editors
+# IDE
 .vscode/
-.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# ML / experiment files
+mlruns/
