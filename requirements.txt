@@ -9,3 +9,5 @@ optuna
 plotly              # used by optuna.visualization
 joblib
 jupyter
+fastapi
+uvicorn
