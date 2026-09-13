@@ -1,4 +1,4 @@
-# Laptop Price Prediction
+# LaptopIQ
 
 An end-to-end machine learning project that predicts laptop prices (₹) from hardware specifications using regression models.
 
@@ -11,7 +11,7 @@ An end-to-end machine learning project that predicts laptop prices (₹) from ha
 
 ## Table of Contents
 
-- [Laptop Price Prediction](#laptop-price-prediction)
+- [LaptopIQ](#laptopiq)
   - [Table of Contents](#table-of-contents)
   - [Screenshots](#screenshots)
     - [LaptopIQ — Price Prediction Interface](#laptopiq--price-prediction-interface)
