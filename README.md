@@ -4,7 +4,53 @@ An end-to-end machine learning project that predicts laptop prices (₹) from ha
 
 > **Status: In Progress**
 >
-> The complete ML pipeline (EDA → cleaning → feature engineering → training → tuning) and FastAPI backend are completed. Streamlit UI and Dockerization are the next stages.
+> The complete ML pipeline, FastAPI backend, and Streamlit frontend are completed.
+> Dockerization and deployment are the next stages.
+
+---
+
+## Table of Contents
+
+- [Laptop Price Prediction](#laptop-price-prediction)
+  - [Table of Contents](#table-of-contents)
+  - [Screenshots](#screenshots)
+    - [LaptopIQ — Price Prediction Interface](#laptopiq--price-prediction-interface)
+    - [Price Prediction](#price-prediction)
+    - [Model Details](#model-details)
+  - [Pipeline](#pipeline)
+  - [Machine Learning](#machine-learning)
+    - [Models Evaluated](#models-evaluated)
+    - [Final Model](#final-model)
+  - [Feature Engineering](#feature-engineering)
+  - [FastAPI](#fastapi)
+    - [API Structure](#api-structure)
+    - [Running the API](#running-the-api)
+    - [Key Endpoints](#key-endpoints)
+  - [Streamlit Frontend](#streamlit-frontend)
+    - [Running the Frontend](#running-the-frontend)
+  - [Project Structure](#project-structure)
+  - [Getting Started](#getting-started)
+    - [Installation](#installation)
+    - [Usage](#usage)
+  - [Tech Stack](#tech-stack)
+  - [Roadmap](#roadmap)
+
+---
+
+## Screenshots
+
+### LaptopIQ — Price Prediction Interface
+
+![LaptopIQ Interface](images/laptopiq-interface1.png)
+![LaptopIQ Interface](images/laptopiq-interface2.png)
+
+### Price Prediction
+
+![LaptopIQ Prediction](images/laptopiq-prediction.png)
+
+### Model Details
+
+![LaptopIQ Model Details](images/laptopiq-model-details.png)
 
 ---
 
@@ -70,8 +116,141 @@ The trained ML pipeline is exposed through a FastAPI backend.
 ### API Structure
 
 ```text
-src/api/
+app/
 ├── main.py
 ├── config.py
 ├── schemas.py
 └── predictor.py
+```
+
+- **`main.py`** — Application entry point; defines API routes (`/predict`, `/health`, `/model-info`).
+- **`config.py`** — Configuration and environment settings (model paths, CORS, etc.).
+- **`schemas.py`** — Pydantic request/response models for input validation.
+- **`predictor.py`** — Loads the trained pipeline and handles feature engineering + inference.
+
+### Running the API
+
+```bash
+uvicorn app.main:app --reload
+```
+
+By default the API is served at `http://127.0.0.1:8000`, with interactive docs available at `http://127.0.0.1:8000/docs`.
+
+### Key Endpoints
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/health` | Health check for the API |
+| `GET` | `/model-info` | Returns model name and evaluation metrics |
+| `POST` | `/predict` | Accepts laptop specifications and returns a predicted price |
+
+---
+
+## Streamlit Frontend
+
+A Streamlit app (`app.py`) provides a UI for entering laptop specifications and viewing predictions in real time. It calls the FastAPI backend via `api_client.py` and displays:
+
+- Live API health status
+- A grouped, spec-driven input form (Brand & System, Performance, Memory & Storage, Graphics, Display)
+- Predicted price with model details (R², MAE, RMSE)
+
+### Running the Frontend
+
+```bash
+streamlit run frontend/app.py
+```
+
+> Make sure the FastAPI server is running first, since the frontend depends on it for predictions and model info.
+
+---
+
+## Project Structure
+
+```text
+laptop/
+├── app/
+│   ├── __init__.py
+│   ├── config.py
+│   ├── main.py
+│   ├── predictor.py
+│   └── schemas.py
+├── data/
+│   ├── processed/
+│   │   ├── laptops_cleaned.csv
+│   │   └── laptops_features.csv
+│   └── raw/
+│       └── laptops.csv
+├── frontend/
+│   ├── __init__.py
+│   ├── api_client.py
+│   ├── app.py
+│   └── styles.py
+├── images/
+│   ├── laptopiq-interface.png
+│   ├── laptopiq-model-details.png
+│   └── laptopiq-prediction.png
+├── notebooks/
+│   ├── 01_eda.ipynb
+│   ├── 02_data_cleaning.ipynb
+│   ├── 03_feature_engineering.ipynb
+│   ├── 04_model_training.ipynb
+│   └── 05_model_tuning.ipynb
+├── src/
+│   └── models/
+│       ├── gb_baseline.pkl
+│       ├── laptop_price_pipeline.pkl
+│       ├── preprocessor.pkl
+│       └── train_test_data.pkl
+├── .gitignore
+├── README.md
+└── requirements.txt
+```
+
+---
+
+## Getting Started
+
+
+### Installation
+
+```bash
+git clone https://github.com/<your-username>/laptop-price-prediction.git
+cd laptop-price-prediction
+pip install -r requirements.txt
+```
+
+### Usage
+
+1. Start the FastAPI backend:
+   ```bash
+   uvicorn app.main:app --reload
+   ```
+2. In a separate terminal, start the Streamlit frontend:
+   ```bash
+   streamlit run frontend/app.py
+   ```
+3. Open the app in your browser (Streamlit will print the local URL, typically `http://localhost:8501`).
+
+---
+
+## Tech Stack
+
+- **Language:** Python
+- **ML/Data:** scikit-learn, XGBoost, Optuna, pandas, NumPy
+- **Backend:** FastAPI, Pydantic, Uvicorn
+- **Frontend:** Streamlit
+- **Notebooks:** Jupyter
+
+---
+
+## Roadmap
+
+- [x] Exploratory data analysis
+- [x] Data cleaning & feature engineering
+- [x] Model training & tuning
+- [x] FastAPI backend
+- [x] Streamlit frontend
+- [ ] Dockerize backend and frontend
+- [ ] Deploy to cloud (e.g. Render / Railway / AWS)
+
+---

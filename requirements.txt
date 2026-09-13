@@ -11,3 +11,5 @@ joblib
 jupyter
 fastapi
 uvicorn
+streamlit
+requests

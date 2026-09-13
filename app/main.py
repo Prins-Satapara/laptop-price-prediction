@@ -37,7 +37,12 @@ def model_info():
         "framework": "scikit-learn",
         "task": "Regression",
         "target": "Laptop Price",
-        "currency": "INR"
+        "currency": "INR",
+        "metrics": {
+            "r2": 0.8961,
+            "mae": 11043.35,
+            "rmse": 18206.07
+        }
     }
     
 
